@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
 
-const MessageSchema = mongoose.Schema(
+const chat_listSchema = mongoose.Schema(
   {
     
     chat_room:String,
-    user_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'user'
-    },
-    created_at:String,
-    updated_at:String,
+    users: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        required: true,
+      }
+    ],
     deleted_at:String,
     is_deleted:Boolean
-
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("Messages", MessageSchema);
+module.exports = mongoose.model("chat_list", chat_listSchema);
