@@ -30,6 +30,17 @@ exports.getSpecificuser = (req, res) => {
         }
     }).populate('activity_status_id')
 }
+// get by user Name 
+exports.getUserByUserName = (req, res) => {
+    const username = req.params.username;
+    userModel.find({ username: username }, function (err, foundResult) {
+        try {
+            res.json({data:foundResult})
+        } catch (err) {
+            res.json(err)
+        }
+    }).populate('activity_status_id')
+}
 // // Login 
 exports.loginuser = (req, res) => {
     const findUser = {
