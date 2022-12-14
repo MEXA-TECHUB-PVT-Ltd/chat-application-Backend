@@ -3,7 +3,7 @@ const userSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     activity_status_id:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'chat_list'
+        ref: 'activity_status'
 },
     username: String,
     first_name: String,
@@ -18,10 +18,16 @@ const userSchema = new mongoose.Schema({
     updated_at:String,
     privacy:String,
     isLogin:Boolean,
-    chatLists:[{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'chat_list'
-    }]
+    // chatLists:[{
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: 'chat_list'
+    // }]
+    gender: {
+        type: String,
+        enum: ['Male', 'Female']
+    },
+    age:String,
+    status:String
 }
 );
 module.exports = mongoose.model("user", userSchema);
