@@ -22,6 +22,17 @@ exports.getSpecificlabel = (req, res) => {
         }
     })
 }
+// // Get label by userId
+exports.getLabelsByUserId = (req, res) => {
+    const UserId = req.params.user_id;
+    labelModel.find({ user_id: UserId }, function (err, foundResult) {
+        try {
+            res.json({ data: foundResult })
+        } catch (err) {
+            res.json(err)
+        }
+    })
+}
 // Delete 
 exports.deletelabel = (req, res) => {
     const labelId = req.params.labelId;
