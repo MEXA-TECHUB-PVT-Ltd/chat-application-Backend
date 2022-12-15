@@ -27,6 +27,11 @@ const MessageSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'messageSubType'
     },
+    staredStatus:Boolean,
+    staredBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
     deleted_at:String,
     is_deleted:Boolean
 
