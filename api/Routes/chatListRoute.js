@@ -7,6 +7,7 @@ router.get("/get/:chat_listId", controller.getSpecificchat_list)
 router.delete("/delete/:chat_listId", controller.deletechat_list)
 router.put("/update" , controller.updatechat_list);
 router.get("/chat_list_by_userId/:userId" , controller.getchat_list_by_userId);
+// Pinned 
 router.put("/pinned_chat" , controller.updatechat_listPinned);
 router.get("/pinned_chatList_by_userId/:userId" , controller.get_pinnedchat_list_by_userId);
 router.put("/UnPinned_chat" , controller.updatechat_listUnPinned);
@@ -14,5 +15,9 @@ router.put("/UnPinned_chat" , controller.updatechat_listUnPinned);
 router.put("/block_chat" , controller.updatechat_listBlocked);
 router.get("/blocked_chatList_by_userId/:userId" , controller.get_blockedchat_list_by_userId);
 router.put("/UnBlock_chat" , controller.updatechat_listUnBlock);
+// Archieved 
+router.put("/archieved_chat" , controller.updatechat_listArchieved);
+router.put("/unarchieved_chat" , controller.updatechat_listUnArchieved);
+router.get("/archieved_chatList_by_userId/:userId" , controller.get_archievedchat_list_by_userId);
 
 module.exports = router;

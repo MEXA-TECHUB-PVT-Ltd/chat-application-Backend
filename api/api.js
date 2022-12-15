@@ -12,8 +12,6 @@ const MessagesSubType = require('./Routes/messageSubTypeRoute')
 const ChatList = require('./Routes/chatListRoute')
 const Activity_Status = require('./Routes/activity_statusRoute')
 const replyMessage = require('./Routes/replyMessageRoute')
-const PinnedChat = require('./Routes/pinnedChatRoute')
-const ArchievedChat = require('./Routes/archievedChatRoute')
 const StaredChat = require('./Routes/staredChatRoute')
 const Label = require('./Routes/labelRoute')
 const LabelChat = require('./Routes/labelChatRoute')
@@ -46,8 +44,6 @@ router.use('/MessagesSubType',MessagesSubType);
 router.use('/ChatList',ChatList);
 router.use('/Activity_Status',Activity_Status);
 router.use('/replyMessage',replyMessage);
-router.use('/PinnedChat',PinnedChat);
-router.use('/ArchievedChat',ArchievedChat);
 router.use('/StaredChat',StaredChat);
 router.use('/Label',Label);
 router.use('/LabelChat',LabelChat);
