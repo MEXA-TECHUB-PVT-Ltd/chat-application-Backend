@@ -17,6 +17,8 @@ const ArchievedChat = require('./Routes/archievedChatRoute')
 const StaredChat = require('./Routes/staredChatRoute')
 const Label = require('./Routes/labelRoute')
 const LabelChat = require('./Routes/labelChatRoute')
+const Terms = require('./Routes/TermsRoute')
+
 
 
 
@@ -49,6 +51,8 @@ router.use('/ArchievedChat',ArchievedChat);
 router.use('/StaredChat',StaredChat);
 router.use('/Label',Label);
 router.use('/LabelChat',LabelChat);
+router.use('/Terms',Terms);
+
 
 
 
