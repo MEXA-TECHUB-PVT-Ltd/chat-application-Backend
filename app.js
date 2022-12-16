@@ -41,9 +41,15 @@ var Publishable_Key = process.env.Publishable_Key
 var Secret_Key = process.env.Secret_Key
 
 app.use('/uploads', express.static('uploads'))
+app.use('/file-uploads', express.static('file-uploads'))
+app.use('/video-uploads', express.static('video-uploads'))
 //multer
 
 app.use('/upload-image', require('./api/upload-image'))
+app.use('/upload-video', require('./api/upload-video'))
+app.use('/upload-multiple-images', require('./api/upload-multiple-images'))
+app.use('/upload-file', require('./api/upload-file'))
+app.use('/upload-multiple-files', require('./api/upload-multiple-files'))
 // Limit request from the same API 
 const limiter = rateLimit({
     max: 150,
