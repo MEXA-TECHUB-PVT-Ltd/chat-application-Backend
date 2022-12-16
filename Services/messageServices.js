@@ -179,3 +179,24 @@ module.exports.ReadTimeAndDeliveredMessages = async (req, res, next) => {
     next(ex);
   }
 };
+module.exports.DeletBulkOfMsgs = async (req, res, next) => {
+  const msgIds = req.body.msg_ids;
+  if (msgIds.length === 0) {
+    console.log(msgIds, "empty")
+
+ 
+} else {
+  console.log(msgIds, "not empty ")
+  Messages.deleteMany({
+     '_id': {
+    $in: msgIds
+}}, function (err, foundResult) {
+    try {
+        res.json({data:foundResult,message:"Deleted Succesfully"})
+    } catch (err) {
+        res.json(err)
+    }
+})
+
+}
+}

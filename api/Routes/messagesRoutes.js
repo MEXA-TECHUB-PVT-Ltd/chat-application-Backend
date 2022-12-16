@@ -7,6 +7,6 @@ router.post("/starmsg", controller.staredMessages)
 router.post("/getStaredMsgsByuserId", controller.getStaredMessagesByUserId)
 router.post("/UpdateReadDeliveredTimeMessages", controller.ReadTimeAndDeliveredMessages)
 router.post("/get-single-msg", controller.getSingleMessage)
-
+router.post("/delete-bulk-of-msgs", controller.DeletBulkOfMsgs)
 
 module.exports = router;
