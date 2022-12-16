@@ -33,7 +33,15 @@ const MessageSchema = mongoose.Schema(
       ref: "user",
     },
     deleted_at:String,
-    is_deleted:Boolean
+    is_deleted:Boolean,
+    repliedStatus:Boolean,
+    repliedMsgId:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+    readTime:String,
+    deliveredTime:String,
+    isForwarded:Boolean
 
   },
   {
