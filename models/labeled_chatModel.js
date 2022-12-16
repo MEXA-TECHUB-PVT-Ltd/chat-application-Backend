@@ -11,10 +11,10 @@ const LabelChatSchema = mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "chat_list",
       },
-    //   label_id:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "label",
-    //   },
+      label_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "label",
+      },
 
   },
   {

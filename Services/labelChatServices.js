@@ -40,11 +40,12 @@ exports.deletelabelChat = (req, res) => {
 }
 // Create 
 exports.createlabelChat = async (req, res) => {
+    
     const labelChat = new labelChatModel({
         _id: mongoose.Types.ObjectId(),
         user_id: req.body.user_id,
         chatlist_id: req.body.chatlist_id,
-        // label_id:req.body.label_id
+        label_id:req.body.label_id
 
     });
     labelChat.save((error, result) => {
@@ -61,7 +62,7 @@ exports.updatelabelChat = async (req, res) => {
     const updateData = {
         user_id: req.body.user_id,
         chatlist_id: req.body.chatlist_id,
-        // label_id:req.body.label_id
+        label_id:req.body.label_id
 
     }
     const options = {
