@@ -8,12 +8,23 @@ module.exports.getMessages = async (req, res, next) => {
         users: {
           $all: [from, to],
         },
-      }).sort({ updatedAt: 1 });
+      }).sort({ updatedAt: 1 }).populate('message_status_id').populate('message_type_id').populate('message_subtype_id')
   
       const projectedMessages = messages.map((msg) => {
         return {
-          fromSelf: msg.sender.toString() === from,
+          fromSelf: msg.sender_id === from,
           message: msg.message.text,
+          message_status_id:msg.message_status_id.name,
+
+          message_type_name:msg.message_type_id.name,
+          message_type_one_type:msg.message_type_id.is_one_time,
+
+          message_subtype_name:msg.message_subtype_id.name,
+          message_subtype_thumbnail:msg.message_subtype_id.thumbnail,
+
+          is_deleted:msg.is_deleted,
+          createdAt:msg.createdAt,
+          deleted_at:msg.deleted_at
         };
       });
       res.json(projectedMessages);

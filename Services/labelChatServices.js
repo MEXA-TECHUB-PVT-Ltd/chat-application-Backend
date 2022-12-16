@@ -29,18 +29,7 @@ exports.getSpecificlabelChat = (req, res) => {
         .populate('chatlist_id')
         .populate('user_id')
 }
-// Delete 
-exports.deletelabelChat = (req, res) => {
-    const labelChatId = req.params.labelChatId;
-    labelChatModel.findByIdAndDelete(labelChatId, (error, result) => {
-        if (error) {
-            res.send({ message: error.message })
-        } else {
-            res.json({ message: "Deleted Successfully" })
-        }
-    })
-}
-// Create 
+// Create /remove label 
 exports.createlabelChat = async (req, res) => {
     // get label by user id 
     const userId = req.body.user_id;
@@ -181,7 +170,34 @@ exports.createlabelChat = async (req, res) => {
                     let ArrayLabel = [];
                     // labels given by user 
                     ArrayLabel = foundResult
+                    // Update count  
 
+                    // console.log(foundResult)
+                    for (let m = 0; m < foundResult.length; m++) {
+                        const IdDATA = foundResult[m]._id;
+                        const COUNT = foundResult[m].count;
+                        // Count 
+                        const updateData = {
+                            // $push:{
+                            //     chatList:foundResult[m]._id
+                            // },
+                            count: parseInt(COUNT) + parseInt(1),
+                            
+
+                        }
+                        const options = {
+                            new: true
+                        }
+                        labelModel.findByIdAndUpdate(IdDATA, updateData, options, (error, result) => {
+                            if (error) {
+                                res.json(error.message)
+                            } else {
+                                // Get Data 
+                               console.log('usos')
+                                // res.send({ data: result, message: "Updated Successfully" })
+                            }
+                        })
+                    }
                     chatListModel.find({ _id: chatListId }, (error, result) => {
                         if (error) {
                             res.send(error)
@@ -310,6 +326,118 @@ exports.createlabelChat = async (req, res) => {
 
 
 
+}
+// // Get All labelChat by userId
+exports.getAllLabeledChatByUseId = (req, res) => {
+    let Array = [];
+    let ResultArray = [];
+    let ChatListByUser = [];
+
+    const UserId = req.params.user_id;
+    labelModel.find({ user_id: UserId }, function (err, foundResult) {
+        try {
+            if (foundResult.length === 0) {
+                res.json({ message: 'No Label for user ' })
+            } else {
+                // res.json({ message: ' Label for user ',data:foundResult })
+                Array = foundResult
+                // ChatList By user Id 
+                chatListModel.find({
+                    users: {
+                        $all: [UserId, UserId],
+                    }
+                }, (error, result) => {
+                    if (error) {
+                        res.send(error)
+                    } else {
+                        if (result) {
+                            // res.json(result.length)
+                            // const chatListLength=result.length
+                            ChatListByUser = result
+                            //  for (let i = 0; i < Array.length; i++) {
+                            // let result = {
+                            //             extraAttribute:'count',
+                            //             ...foundResult
+                            //         }
+                            //         res.json(result)
+                            // start 
+                            let TempArray = [];
+
+                            for (let j = 0; j < ChatListByUser.length; j++) {
+                                console.log(j)
+                                if (ChatListByUser[j].extraAttribute[j].firstUser.userId == UserId) {
+                                    if (ChatListByUser[j].extraAttribute[j].secondUser.label.length === 0) {
+                                        console.log('no label ')
+                                        res.json(Array);
+
+                                    } else {
+                                        console.log("ChatListByUser[j].extraAttribute[j].secondUser.label")
+                                        const tempData = ChatListByUser[j].extraAttribute[j].secondUser.label;
+                                        console.log(tempData.length);
+                                        TempArray.push(ChatListByUser[j])
+
+                                        // for (let k = 0; k < tempData.length; k++) {
+                                        //     TempArray.push(tempData[k])
+                                        // }
+                                        res.json(TempArray)
+
+                                    }
+                                    // console.log(ChatListByUser[j].extraAttribute[j].secondUser.label)
+                                    // TempArray =ChatListByUser[j].extraAttribute[j].secondUser.label
+                                    // TempArray.push(ChatListByUser[j].extraAttribute[j].secondUser.label);
+
+
+                                    //         if (Array[i].extraAttribute[j].secondUser.archieved) {
+                                    //             ResultArray.push(Array[i]);
+                                    //         } else {
+                                    //             console.log('empty')
+                                    //         }
+                                } else {
+                                    if (ChatListByUser[j].extraAttribute[j].firstUser.label.length === 0) {
+                                        console.log('no label ')
+                                    } else {
+                                        console.log("ChatListByUser[j].extraAttribute[j].firstUser.label")
+
+                                    }
+                                    //         if (Array[i].extraAttribute[j].firstUser.archieved) {
+                                    //             ResultArray.push(Array[i]);
+                                    //         } else {
+                                    //             console.log('empty')
+                                    //         }
+                                }
+                                // }
+                            }
+
+
+                            // end 
+                            // console.log(TempArray)
+
+
+                        } else {
+                            console.log('no data in chatlist')
+                        }
+
+                    }
+                }).sort({ $natural: -1 }).populate('users')
+
+
+
+            }
+            // res.json({ data: foundResult })
+        } catch (err) {
+            res.json(err)
+        }
+    })
+    // const labelChatId = req.params.labelChatId;
+    // labelChatModel.find({ _id: labelChatId }, function (err, foundResult) {
+    //     try {
+    //         res.json({ data: foundResult })
+    //     } catch (err) {
+    //         res.json(err)
+    //     }
+    // })
+    //     .populate('chatlist_id')
+    //     .populate('user_id')
 }
 // Update 
 exports.updatelabelChat = async (req, res) => {

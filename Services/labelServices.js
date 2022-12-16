@@ -31,7 +31,7 @@ exports.getLabelsByUserId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('chatList')
 }
 // Delete 
 exports.deletelabel = (req, res) => {
@@ -50,7 +50,9 @@ exports.createlabel = async (req, res) => {
         _id: mongoose.Types.ObjectId(),
         user_id: req.body.user_id,
         name: req.body.name,
-        color:req.body.color
+        color:req.body.color,
+        count:0,
+        chatList:[]
 
     });
     label.save((error, result) => {
@@ -67,7 +69,11 @@ exports.updatelabel = async (req, res) => {
     const updateData = {
         user_id: req.body.user_id,
         name: req.body.name,
-        color:req.body.color
+        color:req.body.color,
+        count:req.body.count,
+        // chatList:[]
+
+
 
     }
     const options = {

@@ -9,6 +9,13 @@ const LabelSchema = mongoose.Schema(
     },
     name:String,
     color:String,
+    count:String,
+    chatList: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "chat_list",
+      }
+    ],
   },
 );
 
