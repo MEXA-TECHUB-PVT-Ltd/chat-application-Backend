@@ -24,8 +24,6 @@ const MessageSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'messageSubType'
     },
-    created_at:String,
-    updated_at:String,
     deleted_at:String,
     is_deleted:Boolean
 

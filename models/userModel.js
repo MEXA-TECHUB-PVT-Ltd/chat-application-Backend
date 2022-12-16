@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    activity_status_id:String,
+    activity_status_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'chat_list'
+},
     username: String,
     first_name: String,
     last_name: String,
@@ -14,7 +17,11 @@ const userSchema = new mongoose.Schema({
     created_at:String,
     updated_at:String,
     privacy:String,
-    isLogin:Boolean
+    isLogin:Boolean,
+    chatLists:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'chat_list'
+    }]
 }
 );
 module.exports = mongoose.model("user", userSchema);

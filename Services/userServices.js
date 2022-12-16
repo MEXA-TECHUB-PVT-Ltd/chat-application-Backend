@@ -168,6 +168,7 @@ exports.createuser = async (req, res) => {
                     created_at:req.body.created_at,
                     updated_at:req.body.updated_at,
                     privacy:req.body.privacy,
+                    chatLists:[]
                 
                 });
                 user.save((error, result) => {
