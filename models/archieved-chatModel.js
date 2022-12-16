@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PinnedChatSchema = mongoose.Schema(
+const ArchievedChatSchema = mongoose.Schema(
   {
     chatlist_id:{
         type: mongoose.Schema.Types.ObjectId,
@@ -11,7 +11,6 @@ const PinnedChatSchema = mongoose.Schema(
         ref: "user",
       },
   },
-  
 );
 
-module.exports = mongoose.model("pinned_chat", PinnedChatSchema);
+module.exports = mongoose.model("archieved_chat", ArchievedChatSchema);
