@@ -9,13 +9,13 @@ module.exports.getMessages = async (req, res, next) => {
         $all: [from, to],
       },
     }).sort({ updatedAt: 1 }).populate('message_status_id').populate('message_type_id').populate('message_subtype_id')
-    .populate('chatlist_id')
+      .populate('chatlist_id')
 
     const projectedMessages = messages.map((msg) => {
       return {
         fromSelf: msg.sender_id === from,
         message_id: msg._id,
-        Message:[msg],
+        Message: [msg],
         // message: msg.message.text,
         // message_status_id: msg.message_status_id.name,
         // message_type_name: msg.message_type_id.name,
@@ -42,14 +42,14 @@ module.exports.getMessages = async (req, res, next) => {
 // Get stared Msgs by UserId 
 module.exports.getStaredMessagesByUserId = async (req, res, next) => {
   try {
-    const { userId, to } = req.body;
+    const { userId } = req.body;
 
     const messages = await Messages.find({
-      staredBy:userId,
-      stredStatus:true
+      staredBy: userId,
+      stredStatus: true
     }).sort({ updatedAt: 1 }).populate('message_status_id').populate('message_type_id').populate('message_subtype_id').populate("sender_id")
-res.json(messages)
-    
+    res.json(messages)
+
   } catch (ex) {
     next(ex);
   }
@@ -60,19 +60,19 @@ module.exports.getSingleMessage = async (req, res, next) => {
     const { message_id } = req.body;
 
     const messages = await Messages.find({
-      _id:message_id
+      _id: message_id
     }).sort({ updatedAt: 1 })
-    .populate('message_status_id')
-    .populate('message_type_id')
-    .populate('message_subtype_id')
-    .populate('chatlist_id')
+      .populate('message_status_id')
+      .populate('message_type_id')
+      .populate('message_subtype_id')
+      .populate('chatlist_id')
 
 
     const projectedMessages = messages.map((msg) => {
       return {
         // fromSelf: msg.sender_id === from,
         message_id: msg._id,
-        Message:[msg],
+        Message: [msg],
         // message: msg.message.text,
         // message_status_id: msg.message_status_id.name,
         // message_type_name: msg.message_type_id.name,
@@ -99,23 +99,23 @@ module.exports.getSingleMessage = async (req, res, next) => {
 module.exports.staredMessages = async (req, res, next) => {
   try {
 
-      const updateData = {
-        staredStatus: req.body.staredStatus,
-        staredBy: req.body.staredBy
+    const updateData = {
+      staredStatus: req.body.staredStatus,
+      staredBy: req.body.staredBy
 
+    }
+    const options = {
+      new: true
+    }
+    Messages.findByIdAndUpdate(req.body.messageId, updateData, options, (error, result) => {
+      if (error) {
+        res.send(error)
+      } else {
+        res.send({ data: result, message: 'Updated Successfully' })
       }
-      const options = {
-        new: true
-      }
-      Messages.findByIdAndUpdate(req.body.messageId, updateData, options, (error, result) => {
-        if (error) {
-          res.send(error)
-        } else {
-          res.send({ data: result, message: 'Updated Successfully' })
-        }
-      })
-   
-    
+    })
+
+
   } catch (ex) {
     next(ex);
   }
@@ -124,8 +124,8 @@ module.exports.staredMessages = async (req, res, next) => {
 module.exports.addMessage = async (req, res, next) => {
   try {
     const { from, to, message, chatlist_id, message_status_id
-      , message_type_id, message_subtype_id, created_at, updated_at,repliedStatus,
-      repliedMsgId,readTime,deliveredTime,isForwarded,
+      , message_type_id, message_subtype_id, created_at, updated_at, repliedStatus,
+      repliedMsgId, readTime, deliveredTime, isForwarded,
       deleted_at, is_deleted } = req.body;
     const data = await Messages.create({
       message: { text: message },
@@ -139,12 +139,12 @@ module.exports.addMessage = async (req, res, next) => {
       updated_at: updated_at,
       deleted_at: deleted_at,
       staredStatus: false,
-      repliedStatus:repliedStatus,
-      repliedMsgId:repliedMsgId,
+      repliedStatus: repliedStatus,
+      repliedMsgId: repliedMsgId,
       is_deleted: is_deleted,
-      readTime:readTime,
-      deliveredTime:deliveredTime,
-      isForwarded:isForwarded
+      readTime: readTime,
+      deliveredTime: deliveredTime,
+      isForwarded: isForwarded
 
     });
 
@@ -159,22 +159,22 @@ module.exports.addMessage = async (req, res, next) => {
 // Update Read and delivered Time 
 module.exports.ReadTimeAndDeliveredMessages = async (req, res, next) => {
   try {
-      const updateData = {
-        readTime:req.body.readTime,
-        deliveredTime:req.body.deliveredTime
+    const updateData = {
+      readTime: req.body.readTime,
+      deliveredTime: req.body.deliveredTime
+    }
+    const options = {
+      new: true
+    }
+    Messages.findByIdAndUpdate(req.body.message_id, updateData, options, (error, result) => {
+      if (error) {
+        res.send(error)
+      } else {
+        res.send({ data: result, message: 'Updated Successfully' })
       }
-      const options = {
-        new: true
-      }
-      Messages.findByIdAndUpdate(req.body.message_id, updateData, options, (error, result) => {
-        if (error) {
-          res.send(error)
-        } else {
-          res.send({ data: result, message: 'Updated Successfully' })
-        }
-      })
-   
-    
+    })
+
+
   } catch (ex) {
     next(ex);
   }
@@ -184,19 +184,135 @@ module.exports.DeletBulkOfMsgs = async (req, res, next) => {
   if (msgIds.length === 0) {
     console.log(msgIds, "empty")
 
- 
-} else {
-  console.log(msgIds, "not empty ")
-  Messages.deleteMany({
-     '_id': {
-    $in: msgIds
-}}, function (err, foundResult) {
-    try {
-        res.json({data:foundResult,message:"Deleted Succesfully"})
-    } catch (err) {
+  } else {
+    console.log(msgIds, "not empty ")
+    Messages.deleteMany({
+      '_id': {
+        $in: msgIds
+      }
+    }, function (err, foundResult) {
+      try {
+        res.json({ data: foundResult, message: "Deleted Succesfully" })
+      } catch (err) {
         res.json(err)
-    }
-})
+      }
+    })
 
+  }
 }
+module.exports.GetAllMsgsByUserId = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+
+    const messages = await Messages.find({
+      users: {
+        $all: [userId, userId],
+      },
+    }).sort({ updatedAt: 1 }).populate('message_status_id').populate('message_type_id').populate('message_subtype_id').populate("sender_id")
+    res.json(messages)
+
+  } catch (ex) {
+    next(ex);
+  }
+}
+// FilterAllChatByUserId
+module.exports.FilterAllChatByUserId = async (req, res, next) => {
+  try {
+    const UserId = req.body.userId;
+    const text_search = req.body.message
+    Messages.findOne({
+      "message.text": { $regex: text_search, $options: 'i' }
+      ,  users: {
+        $all: [UserId, UserId],
+      },
+    },
+      function (err, result) {
+        if (err) { return handleError(err); } else {
+          res.json(result);
+
+        }
+
+      }).populate('chatlist_id')
+      .populate('sender_id')
+      .populate('message_status_id')
+      .populate('message_type_id')
+      .populate('message_subtype_id')
+    // let ArrayCond = [];
+    // ArrayCond = await Messages.aggregate([
+    //   {
+    //     $match: {
+    //       "message.text": {
+    //         $regex: text_search,
+    //         "$options": "i"
+    //       },
+    //       users: {
+    //         $all: [UserId, UserId],
+    //       },
+
+    //     }
+    //   }
+
+    // ])
+    // return res.json(ArrayCond)
+
+  } catch (ex) {
+    next(ex);
+  }
+}
+// FilterAllChatByUserId-single 
+module.exports.FilterSingleChatByUserId = async (req, res, next) => {
+  try {
+    const text_search = req.body.message;
+    const chatListId = req.body.chatlist_id;
+    Messages.findOne({
+      "message.text": { $regex: text_search, $options: 'i' }
+      , chatlist_id: chatListId
+    },
+      function (err, result) {
+        if (err) { return handleError(err); } else {
+          res.json(result);
+
+        }
+
+      }).populate('chatlist_id')
+      .populate('sender_id')
+      .populate('message_status_id')
+      .populate('message_type_id')
+      .populate('message_subtype_id')
+
+  } catch (ex) {
+    next(ex);
+  }
+}
+// Filter Users Stared Msgs 
+module.exports.FilterStaredChatByUserId = async (req, res, next) => {
+  try {
+    const text_search = req.body.message;
+    const UserId = req.body.userId;
+
+    Messages.findOne({
+      "message.text": { $regex: text_search, $options: 'i' }
+      ,
+      users: {
+        $all: [UserId, UserId],
+
+      },
+      staredBy:UserId,
+      staredStatus:true
+    },
+      function (err, result) {
+        if (err) { return handleError(err); } else {
+          res.json(result);
+
+        }
+
+      }).populate('chatlist_id')
+      .populate('sender_id')
+      .populate('message_status_id')
+      .populate('message_type_id')
+      .populate('message_subtype_id')
+
+  } catch (ex) {
+    next(ex);
+  }
 }
