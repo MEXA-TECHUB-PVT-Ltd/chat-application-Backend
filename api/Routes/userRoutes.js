@@ -12,6 +12,8 @@ router.post("/otpSms" , controller.otpTwilio);
 router.put("/update-user" , controller.updateuser);
 router.put("/logout" , controller.logoutuser);
 router.put("/login" , controller.loginuser);
+router.get("/getByUserName/:username" , controller.getUserByUserName);
+
 // router.post("/forget-password" , controller.forgetPasswordAdmin);
 
 module.exports = router;
