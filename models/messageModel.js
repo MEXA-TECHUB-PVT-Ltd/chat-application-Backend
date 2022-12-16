@@ -5,7 +5,10 @@ const MessageSchema = mongoose.Schema(
     message: {
       text: { type: String, required: true },
     },
-    chatlist_id:String,
+    chatlist_id:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "chat_list",
+    },
     users: Array,
     sender_id: {
       type: mongoose.Schema.Types.ObjectId,
