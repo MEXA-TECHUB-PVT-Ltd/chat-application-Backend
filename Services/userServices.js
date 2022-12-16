@@ -17,7 +17,7 @@ exports.getAllusers = (req, res) => {
         } else {
             res.send(result)
         }
-    }).sort({ $natural: -1 })
+    }).sort({ $natural: -1 }).populate('activity_status_id')
 }
 // // Get user 
 exports.getSpecificuser = (req, res) => {
@@ -28,7 +28,7 @@ exports.getSpecificuser = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('activity_status_id')
 }
 // // Login 
 exports.loginuser = (req, res) => {
@@ -168,7 +168,13 @@ exports.createuser = async (req, res) => {
                     created_at:req.body.created_at,
                     updated_at:req.body.updated_at,
                     privacy:req.body.privacy,
-                    chatLists:[]
+                    chatLists:[],
+                    gender:req.body.gender,
+                    age:req.body.age,
+                    status:req.body.status,
+
+
+
                 
                 });
                 user.save((error, result) => {
@@ -223,7 +229,10 @@ exports.updateuser = async (req, res) => {
         admin_block_status:req.body.admin_block_status,
         created_at:req.body.created_at,
         updated_at:req.body.updated_at,
-        privacy:req.body.privacy
+        privacy:req.body.privacy,
+        gender:req.body.gender,
+        age:req.body.age,
+        status:req.body.status,
     }
     const options = {
         new: true
