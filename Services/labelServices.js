@@ -51,7 +51,6 @@ exports.createlabel = async (req, res) => {
         user_id: req.body.user_id,
         name: req.body.name,
         color:req.body.color,
-        count:0,
         chatList:[]
 
     });
@@ -64,13 +63,50 @@ exports.createlabel = async (req, res) => {
     })
 
 }
+//Add label to some chat  
+exports.updatelabelChatList = async (req, res) => {
+    const updateData = {
+        $push:{
+            chatList:req.body.chatListId
+        }
+        // chatList:[]
+    }
+    const options = {
+        new: true
+    }
+    labelModel.findByIdAndUpdate(req.body._id, updateData, options, (error, result) => {
+        if (error) {
+            res.json(error.message)
+        } else {
+            res.send({ data: result, message: "Added Label Successfully" })
+        }
+    })
+}
+//Remove label to some chat  
+exports.updatelabelChatListRemove = async (req, res) => {
+    const updateData = {
+        $pull:{
+            chatList:req.body.chatListId
+        }
+        // chatList:[]
+    }
+    const options = {
+        new: true
+    }
+    labelModel.findByIdAndUpdate(req.body._id, updateData, options, (error, result) => {
+        if (error) {
+            res.json(error.message)
+        } else {
+            res.send({ data: result, message: "Added Label Successfully" })
+        }
+    })
+}
 // Update 
 exports.updatelabel = async (req, res) => {
     const updateData = {
         user_id: req.body.user_id,
         name: req.body.name,
         color:req.body.color,
-        count:req.body.count,
         // chatList:[]
 
 

@@ -253,14 +253,14 @@ exports.updatechat_list = async (req, res) => {
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
             const firstUserBlocked = result[0].extraAttribute[0].firstUser.blockStatus
             const firstArchievedStatus = result[0].extraAttribute[0].firstUser.archieved
-            const firstlabel = result[0].extraAttribute[0].firstUser.label
+            // // const firstlabel = result[0].extraAttribute[0].firstUser.label
 
             const secondUserId = result[0].extraAttribute[0].secondUser.userId
             const secondUsername = result[0].extraAttribute[0].secondUser.chatName
             const secondUserPinned = result[0].extraAttribute[0].secondUser.pinnedStatus
             const secondUserBlocked = result[0].extraAttribute[0].secondUser.blockStatus
             const secondArchievedStatus = result[0].extraAttribute[0].secondUser.archieved
-            const secondlabel = result[0].extraAttribute[0].secondUser.label
+            // // const secondlabel = result[0].extraAttribute[0].secondUser.label
 
 
             if (firstUserId == EditedBy) {
@@ -275,7 +275,7 @@ exports.updatechat_list = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
                             },
@@ -285,7 +285,7 @@ exports.updatechat_list = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -314,7 +314,7 @@ exports.updatechat_list = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
 
@@ -325,7 +325,7 @@ exports.updatechat_list = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
                             }
                         }
@@ -361,7 +361,7 @@ exports.updatechat_listPinned = async (req, res) => {
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
             const firstUserBlocked = result[0].extraAttribute[0].firstUser.blockStatus
             const firstArchievedStatus = result[0].extraAttribute[0].firstUser.archieved
-            const firstlabel = result[0].extraAttribute[0].firstUser.label
+            // // const firstlabel = result[0].extraAttribute[0].firstUser.label
 
 
             const secondUserId = result[0].extraAttribute[0].secondUser.userId
@@ -369,7 +369,7 @@ exports.updatechat_listPinned = async (req, res) => {
             const secondUserPinned = result[0].extraAttribute[0].secondUser.pinnedStatus
             const secondUserBlocked = result[0].extraAttribute[0].secondUser.blockStatus
             const secondArchievedStatus = result[0].extraAttribute[0].secondUser.archieved
-            const secondlabel = result[0].extraAttribute[0].secondUser.label
+            // // const secondlabel = result[0].extraAttribute[0].secondUser.label
 
 
             if (firstUserId == EditedBy) {
@@ -384,7 +384,7 @@ exports.updatechat_listPinned = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
                             },
@@ -394,7 +394,7 @@ exports.updatechat_listPinned = async (req, res) => {
                                 pinnedStatus: true,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -424,7 +424,7 @@ exports.updatechat_listPinned = async (req, res) => {
                                 pinnedStatus: true,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
 
@@ -436,7 +436,7 @@ exports.updatechat_listPinned = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -477,7 +477,7 @@ exports.updatechat_listUnPinned = async (req, res) => {
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
             const firstUserBlocked = result[0].extraAttribute[0].firstUser.blockStatus
             const firstArchievedStatus = result[0].extraAttribute[0].firstUser.archieved
-            const firstlabel = result[0].extraAttribute[0].firstUser.label
+            // // const firstlabel = result[0].extraAttribute[0].firstUser.label
 
 
             const secondUserId = result[0].extraAttribute[0].secondUser.userId
@@ -485,7 +485,7 @@ exports.updatechat_listUnPinned = async (req, res) => {
             const secondUserPinned = result[0].extraAttribute[0].secondUser.pinnedStatus
             const secondUserBlocked = result[0].extraAttribute[0].secondUser.blockStatus
             const secondArchievedStatus = result[0].extraAttribute[0].secondUser.archieved
-            const secondlabel = result[0].extraAttribute[0].secondUser.label
+            // // const secondlabel = result[0].extraAttribute[0].secondUser.label
 
             if (firstUserId == EditedBy) {
 
@@ -499,7 +499,7 @@ exports.updatechat_listUnPinned = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
                             },
@@ -509,7 +509,7 @@ exports.updatechat_listUnPinned = async (req, res) => {
                                 pinnedStatus: false,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -538,7 +538,7 @@ exports.updatechat_listUnPinned = async (req, res) => {
                                 pinnedStatus: false,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
 
@@ -549,7 +549,7 @@ exports.updatechat_listUnPinned = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -589,7 +589,7 @@ exports.updatechat_listBlocked = async (req, res) => {
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
             const firstUserBlocked = result[0].extraAttribute[0].firstUser.blockStatus
             const firstArchievedStatus = result[0].extraAttribute[0].firstUser.archieved
-            const firstlabel = result[0].extraAttribute[0].firstUser.label
+            // // const firstlabel = result[0].extraAttribute[0].firstUser.label
 
 
             const secondUserId = result[0].extraAttribute[0].secondUser.userId
@@ -597,7 +597,7 @@ exports.updatechat_listBlocked = async (req, res) => {
             const secondUserPinned = result[0].extraAttribute[0].secondUser.pinnedStatus
             const secondUserBlocked = result[0].extraAttribute[0].secondUser.blockStatus
             const secondArchievedStatus = result[0].extraAttribute[0].secondUser.archieved
-            const secondlabel = result[0].extraAttribute[0].secondUser.label
+            // // const secondlabel = result[0].extraAttribute[0].secondUser.label
 
 
             if (firstUserId == EditedBy) {
@@ -612,7 +612,7 @@ exports.updatechat_listBlocked = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
                             },
@@ -622,7 +622,7 @@ exports.updatechat_listBlocked = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: true,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -652,7 +652,7 @@ exports.updatechat_listBlocked = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: true,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
 
@@ -664,7 +664,7 @@ exports.updatechat_listBlocked = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -704,7 +704,7 @@ exports.updatechat_listUnBlock = async (req, res) => {
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
             const firstUserBlocked = result[0].extraAttribute[0].firstUser.blockStatus
             const firstArchievedStatus = result[0].extraAttribute[0].firstUser.archieved
-            const firstlabel = result[0].extraAttribute[0].firstUser.label
+            // // const firstlabel = result[0].extraAttribute[0].firstUser.label
 
 
             const secondUserId = result[0].extraAttribute[0].secondUser.userId
@@ -712,7 +712,7 @@ exports.updatechat_listUnBlock = async (req, res) => {
             const secondUserPinned = result[0].extraAttribute[0].secondUser.pinnedStatus
             const secondUserBlocked = result[0].extraAttribute[0].secondUser.blockStatus
             const secondArchievedStatus = result[0].extraAttribute[0].secondUser.archieved
-            const secondlabel = result[0].extraAttribute[0].secondUser.label
+            // // const secondlabel = result[0].extraAttribute[0].secondUser.label
 
             if (firstUserId == EditedBy) {
 
@@ -726,7 +726,7 @@ exports.updatechat_listUnBlock = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
                             },
@@ -736,7 +736,7 @@ exports.updatechat_listUnBlock = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: false,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -765,7 +765,7 @@ exports.updatechat_listUnBlock = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: false,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
 
@@ -776,7 +776,7 @@ exports.updatechat_listUnBlock = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -816,7 +816,7 @@ exports.updatechat_listArchieved = async (req, res) => {
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
             const firstUserBlocked = result[0].extraAttribute[0].firstUser.blockStatus
             const firstArchievedStatus = result[0].extraAttribute[0].firstUser.archieved
-            const firstlabel = result[0].extraAttribute[0].firstUser.label
+            // // const firstlabel = result[0].extraAttribute[0].firstUser.label
 
 
             const secondUserId = result[0].extraAttribute[0].secondUser.userId
@@ -824,7 +824,7 @@ exports.updatechat_listArchieved = async (req, res) => {
             const secondUserPinned = result[0].extraAttribute[0].secondUser.pinnedStatus
             const secondUserBlocked = result[0].extraAttribute[0].secondUser.blockStatus
             const secondArchievedStatus = result[0].extraAttribute[0].secondUser.archieved
-            const secondlabel = result[0].extraAttribute[0].secondUser.label
+            // // const secondlabel = result[0].extraAttribute[0].secondUser.label
 
 
             if (firstUserId == EditedBy) {
@@ -839,7 +839,7 @@ exports.updatechat_listArchieved = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
                             },
@@ -849,7 +849,7 @@ exports.updatechat_listArchieved = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: true,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -879,7 +879,7 @@ exports.updatechat_listArchieved = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: true,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
 
@@ -891,7 +891,7 @@ exports.updatechat_listArchieved = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -930,7 +930,7 @@ exports.updatechat_listUnArchieved = async (req, res) => {
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
             const firstUserBlocked = result[0].extraAttribute[0].firstUser.blockStatus
             const firstArchievedStatus = result[0].extraAttribute[0].firstUser.archieved
-            const firstlabel = result[0].extraAttribute[0].firstUser.label
+            // // const firstlabel = result[0].extraAttribute[0].firstUser.label
 
 
             const secondUserId = result[0].extraAttribute[0].secondUser.userId
@@ -938,7 +938,7 @@ exports.updatechat_listUnArchieved = async (req, res) => {
             const secondUserPinned = result[0].extraAttribute[0].secondUser.pinnedStatus
             const secondUserBlocked = result[0].extraAttribute[0].secondUser.blockStatus
             const secondArchievedStatus = result[0].extraAttribute[0].secondUser.archieved
-            const secondlabel = result[0].extraAttribute[0].secondUser.label
+            // // const secondlabel = result[0].extraAttribute[0].secondUser.label
 
             if (firstUserId == EditedBy) {
 
@@ -952,7 +952,7 @@ exports.updatechat_listUnArchieved = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: firstArchievedStatus,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
 
@@ -963,7 +963,7 @@ exports.updatechat_listUnArchieved = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: false,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 
@@ -992,7 +992,7 @@ exports.updatechat_listUnArchieved = async (req, res) => {
                                 pinnedStatus: firstUserPinned,
                                 blockStatus: firstUserBlocked,
                                 archieved: false,
-                                label:firstlabel
+                                // // label:firstlabel
 
 
 
@@ -1003,7 +1003,7 @@ exports.updatechat_listUnArchieved = async (req, res) => {
                                 pinnedStatus: secondUserPinned,
                                 blockStatus: secondUserBlocked,
                                 archieved: secondArchievedStatus,
-                                label:secondlabel
+                                // // label:secondlabel
 
 
 

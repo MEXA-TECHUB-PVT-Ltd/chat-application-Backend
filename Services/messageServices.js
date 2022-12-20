@@ -1,4 +1,5 @@
 const Messages = require("../models/messageModel");
+const messageTypeModel = require("../models/messageTypeModel");
 // Get Messages 
 module.exports.getMessages = async (req, res, next) => {
   try {
@@ -16,21 +17,6 @@ module.exports.getMessages = async (req, res, next) => {
         fromSelf: msg.sender_id === from,
         message_id: msg._id,
         Message: [msg],
-        // message: msg.message.text,
-        // message_status_id: msg.message_status_id.name,
-        // message_type_name: msg.message_type_id.name,
-        // message_type_one_type: msg.message_type_id.is_one_time,
-        // message_subtype_name: msg.message_subtype_id.name,
-        // message_subtype_thumbnail: msg.message_subtype_id.thumbnail,
-        // is_deleted: msg.is_deleted,
-        // createdAt: msg.createdAt,
-        // deleted_at: msg.deleted_at,
-        // chatList_id: msg.chatlist_id,
-        // staredStatus: msg.staredStatus,
-        // staredBy: msg.staredBy,
-        // repliedStatus:msg.repliedStatus,
-        // repliedMsgId:msg.repliedMsgId
-
 
       };
     });
@@ -73,20 +59,6 @@ module.exports.getSingleMessage = async (req, res, next) => {
         // fromSelf: msg.sender_id === from,
         message_id: msg._id,
         Message: [msg],
-        // message: msg.message.text,
-        // message_status_id: msg.message_status_id.name,
-        // message_type_name: msg.message_type_id.name,
-        // message_type_one_type: msg.message_type_id.is_one_time,
-        // message_subtype_name: msg.message_subtype_id.name,
-        // message_subtype_thumbnail: msg.message_subtype_id.thumbnail,
-        // is_deleted: msg.is_deleted,
-        // createdAt: msg.createdAt,
-        // deleted_at: msg.deleted_at,
-        // chatList_id: msg.chatlist_id,
-        // staredStatus: msg.staredStatus,
-        // staredBy: msg.staredBy,
-        // repliedStatus:msg.repliedStatus,
-        // repliedMsgId:msg.repliedMsgId
 
 
       };
@@ -125,7 +97,6 @@ module.exports.addMessage = async (req, res, next) => {
   try {
     const { from, to, message, chatlist_id, message_status_id,
       imageType,VideoType,
-
        message_type_id,
       files,
       locationLat,
@@ -135,7 +106,6 @@ module.exports.addMessage = async (req, res, next) => {
       ContactNo,
       ContactName,
       ContactImage,
-      //  message_subtype_id, 
        created_at, updated_at, repliedStatus,
       repliedMsgId, readTime, deliveredTime, isForwarded,
       deleted_at, is_deleted ,is_one_time,
@@ -150,7 +120,6 @@ module.exports.addMessage = async (req, res, next) => {
         message_status_id: message_status_id,
         message_type_name:message_type_name,
         message_type_id: message_type_id,
-        // message_subtype_id: message_subtype_id,
         created_at: created_at,
         updated_at: updated_at,
         deleted_at: deleted_at,
@@ -180,7 +149,6 @@ module.exports.addMessage = async (req, res, next) => {
         sender_id: from,
         message_status_id: message_status_id,
         message_type_id: message_type_id,
-        // message_subtype_id: message_subtype_id,
         message_type_name:message_type_name,
         created_at: created_at,
         updated_at: updated_at,
@@ -212,7 +180,6 @@ module.exports.addMessage = async (req, res, next) => {
         message_type_id: message_type_id,
         imageType:imageType,
         VideoType:VideoType,
-        // message_subtype_id: message_subtype_id,
         message_type_name:message_type_name,
         created_at: created_at,
         updated_at: updated_at,
@@ -232,22 +199,18 @@ module.exports.addMessage = async (req, res, next) => {
   
       else return res.json({ msg: "Failed to add message to the database" });
       }else if(message_type_name==='Location'){
-        // var array = files.split(',');
-        // console.log(array)
+
       const data = await Messages.create({
         message: { text: message },
-        // files:array,
         locationLat:locationLat,
         locationLong:locationLong,
         locationAddress:locationAddress,
         userImagePointer:userImagePointer,
-
         users: [from, to],
         chatlist_id: chatlist_id,
         sender_id: from,
         message_status_id: message_status_id,
         message_type_id: message_type_id,
-        // message_subtype_id: message_subtype_id,
         message_type_name:message_type_name,
         created_at: created_at,
         updated_at: updated_at,
@@ -267,11 +230,8 @@ module.exports.addMessage = async (req, res, next) => {
   
       else return res.json({ msg: "Failed to add message to the database" });
       }else if(message_type_name==='Contact'){
-        // var array = files.split(',');
-        // console.log(array)
       const data = await Messages.create({
         message: { text: message },
-        // files:array,
         ContactNo:ContactNo,
         ContactName:ContactName,
         ContactImage:ContactImage,
@@ -280,7 +240,6 @@ module.exports.addMessage = async (req, res, next) => {
         sender_id: from,
         message_status_id: message_status_id,
         message_type_id: message_type_id,
-        // message_subtype_id: message_subtype_id,
         message_type_name:message_type_name,
         created_at: created_at,
         updated_at: updated_at,
