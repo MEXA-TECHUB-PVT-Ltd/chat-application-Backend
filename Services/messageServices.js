@@ -124,14 +124,17 @@ module.exports.staredMessages = async (req, res, next) => {
 module.exports.addMessage = async (req, res, next) => {
   try {
     const { from, to, message, chatlist_id, message_status_id,
+      imageType,VideoType,
+
        message_type_id,
       files,
       locationLat,
       locationLong,
+      locationAddress,
       userImagePointer,
       ContactNo,
       ContactName,
-      Options,
+      ContactImage,
       //  message_subtype_id, 
        created_at, updated_at, repliedStatus,
       repliedMsgId, readTime, deliveredTime, isForwarded,
@@ -207,6 +210,8 @@ module.exports.addMessage = async (req, res, next) => {
         sender_id: from,
         message_status_id: message_status_id,
         message_type_id: message_type_id,
+        imageType:imageType,
+        VideoType:VideoType,
         // message_subtype_id: message_subtype_id,
         message_type_name:message_type_name,
         created_at: created_at,
@@ -234,6 +239,7 @@ module.exports.addMessage = async (req, res, next) => {
         // files:array,
         locationLat:locationLat,
         locationLong:locationLong,
+        locationAddress:locationAddress,
         userImagePointer:userImagePointer,
 
         users: [from, to],
@@ -268,7 +274,7 @@ module.exports.addMessage = async (req, res, next) => {
         // files:array,
         ContactNo:ContactNo,
         ContactName:ContactName,
-
+        ContactImage:ContactImage,
         users: [from, to],
         chatlist_id: chatlist_id,
         sender_id: from,
@@ -293,39 +299,8 @@ module.exports.addMessage = async (req, res, next) => {
       if (data) return res.json({ data: data, message: "Message Added successfully" });
   
       else return res.json({ msg: "Failed to add message to the database" });
-      }else if(message_type_name==='Poll'){
-        var array = Options.split(',');
-        console.log(array)
-      const data = await Messages.create({
-        message: { text: message },
-        // files:array,
-       Options:array,
-
-
-        users: [from, to],
-        chatlist_id: chatlist_id,
-        sender_id: from,
-        message_status_id: message_status_id,
-        message_type_id: message_type_id,
-        // message_subtype_id: message_subtype_id,
-        message_type_name:message_type_name,
-        created_at: created_at,
-        updated_at: updated_at,
-        deleted_at: deleted_at,
-        staredStatus: false,
-        repliedStatus: repliedStatus,
-        repliedMsgId: repliedMsgId,
-        is_deleted: is_deleted,
-        readTime: readTime,
-        deliveredTime: deliveredTime,
-        isForwarded: isForwarded,
-        is_one_time:is_one_time
-  
-      });
-  
-      if (data) return res.json({ data: data, message: "Message Added successfully" });
-  
-      else return res.json({ msg: "Failed to add message to the database" });
+      }else{
+        res.json({message:"Failed to add msg check msg type name "})
       }
      
   } catch (ex) {

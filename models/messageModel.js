@@ -29,12 +29,15 @@ const MessageSchema = mongoose.Schema(
       enum: ['Text', 'Document', 'Images', 'Videos', 'Audio', 'Location', 'Contact', 'Poll']
     },
     docType: String,
+    imageType:String,
+    VideoType:String,
     locationLat:String,
     locationLong:String,
+    locationAddress:String,
     userImagePointer:String,
     ContactNo:String,
     ContactName:String,
-    Options:Array,
+    ContactImage:String,
     staredStatus: Boolean,
     staredBy: {
       type: mongoose.Schema.Types.ObjectId,
