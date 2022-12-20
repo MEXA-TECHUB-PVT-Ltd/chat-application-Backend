@@ -9,7 +9,7 @@ exports.getAllmessageTypes = (req, res) => {
         } else {
             res.send(result)
         }
-    }).sort({ $natural: -1 })
+    })
 }
 // // Get messageType 
 exports.getSpecificmessageType = (req, res) => {
@@ -38,8 +38,7 @@ exports.createmessageType = async (req, res) => {
     const messageType = new messageTypeModel({
         _id: mongoose.Types.ObjectId(),
         name: req.body.name,
-        is_one_time: req.body.is_one_time
-
+        thumbnail:req.body.thumbnail
     });
     messageType.save((error, result) => {
         if (error) {
@@ -54,8 +53,7 @@ exports.createmessageType = async (req, res) => {
 exports.updatemessageType = async (req, res) => {
     const updateData = {
         name: req.body.name,
-        is_one_time: req.body.is_one_time
-
+        thumbnail:req.body.thumbnail
     }
     const options = {
         new: true
