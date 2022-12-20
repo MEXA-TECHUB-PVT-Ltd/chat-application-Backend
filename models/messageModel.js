@@ -5,7 +5,8 @@ const MessageSchema = mongoose.Schema(
     message: {
       text: { type: String, required: true },
     },
-    chatlist_id:{
+    files: Array,
+    chatlist_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "chat_list",
     },
@@ -22,26 +23,37 @@ const MessageSchema = mongoose.Schema(
     message_type_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'messageType'
-    }, 
-    message_subtype_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'messageSubType'
     },
-    staredStatus:Boolean,
+    message_type_name: {
+      type: String,
+      enum: ['Text', 'Document', 'Images', 'Videos', 'Audio', 'Location', 'Contact', 'Poll']
+    },
+    docType: String,
+    imageType:String,
+    VideoType:String,
+    locationLat:String,
+    locationLong:String,
+    locationAddress:String,
+    userImagePointer:String,
+    ContactNo:String,
+    ContactName:String,
+    ContactImage:String,
+    staredStatus: Boolean,
     staredBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
-    deleted_at:String,
-    is_deleted:Boolean,
-    repliedStatus:Boolean,
-    repliedMsgId:{
+    deleted_at: String,
+    is_deleted: Boolean,
+    repliedStatus: Boolean,
+    repliedMsgId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
-    readTime:String,
-    deliveredTime:String,
-    isForwarded:Boolean
+    readTime: String,
+    deliveredTime: String,
+    isForwarded: Boolean,
+    is_one_time: Boolean
 
   },
   {

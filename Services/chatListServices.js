@@ -16,22 +16,17 @@ exports.getAllchat_lists = (req, res) => {
 exports.getchat_list_by_userId = async (req, res) => {
     const userId = req.params.userId;
 
-    let Array = [];
     chat_listModel.find({
         users: {
             $all: [userId, userId],
-        }
+        },
+
     }, (error, result) => {
         if (error) {
             res.send(error)
         } else {
             if (result) {
                 res.json(result)
-                //     result = {
-                //         extraAttribute: 1,
-                //         ...result
-                //     }
-                //     res.json(result)
 
             } else {
                 console.log('no data in chatlist')
