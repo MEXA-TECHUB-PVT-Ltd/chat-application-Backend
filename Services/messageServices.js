@@ -493,3 +493,33 @@ module.exports.FilterStaredChatByUserId = async (req, res, next) => {
     next(ex);
   }
 }
+// filter-chatlist-msgs-by-msg-type
+module.exports.FilterChatByMsgType = async (req, res, next) => {
+  try {
+    const from = req.body.from;
+    const to = req.body.to;
+    const message_type_id=req.body.message_type_id
+
+
+    Messages.find({
+      users: {
+        $all: [from, to],
+
+      },
+      message_type_id:message_type_id
+    },
+      function (err, result) {
+        if (err) { return handleError(err); } else {
+          res.json(result);
+        }
+
+      }).populate('chatlist_id')
+      .populate('sender_id')
+      .populate('message_status_id')
+      .populate('message_type_id')
+      
+
+  } catch (ex) {
+    next(ex);
+  }
+}

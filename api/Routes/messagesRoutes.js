@@ -12,5 +12,6 @@ router.post("/get-all-msgs-by-userId", controller.GetAllMsgsByUserId)
 router.post("/filter-all-chat-of-user", controller.FilterAllChatByUserId)
 router.post("/filter-single-chatlist-of-user", controller.FilterSingleChatByUserId)
 router.post("/filter-stared-chatlist-of-user", controller.FilterStaredChatByUserId)
+router.post("/filter-chatlist-msgs-by-msg-type", controller.FilterChatByMsgType)
 
 module.exports = router;
