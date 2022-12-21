@@ -21,6 +21,7 @@ exports.getAllusers = (req, res) => {
 }
 // // Get user 
 exports.getSpecificuser = (req, res) => {
+    
     const userId = req.params.userId;
     userModel.find({ _id: userId }, function (err, foundResult) {
         try {
@@ -33,7 +34,7 @@ exports.getSpecificuser = (req, res) => {
 // get by user Name 
 exports.getUserByUserName = (req, res) => {
     const username = req.params.username;
-    userModel.find({ username: username }, function (err, foundResult) {
+    userModel.find({  "username": { $regex: username, $options: 'i' } }, function (err, foundResult) {
         try {
             res.json({data:foundResult})
         } catch (err) {

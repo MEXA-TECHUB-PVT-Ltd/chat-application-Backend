@@ -243,105 +243,113 @@ exports.updatechat_list = async (req, res) => {
     const chatListId = req.body._id;
 
     // console.log(nameEdit)
-    chat_listModel.find({ _id: chatListId }, (error, result) => {
+    chat_listModel.find({ _id: chatListId 
+        ,  users: {
+        $all: [EditedBy, EditedBy]
+      },}, (error, result) => {
         if (error) {
             res.send(error)
         } else {
-            // res.send(result[0].extraAttribute)
-            const firstUserId = result[0].extraAttribute[0].firstUser.userId
-            const firstUsername = result[0].extraAttribute[0].firstUser.chatName
-            const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
-            const firstUserBlocked = result[0].extraAttribute[0].firstUser.blockStatus
-            const firstArchievedStatus = result[0].extraAttribute[0].firstUser.archieved
-            // // const firstlabel = result[0].extraAttribute[0].firstUser.label
+            if(result.length===0){
+           res.json({message:'No data found to update'})
+            }else{
+  // res.send(result[0].extraAttribute)
+  const firstUserId = result[0].extraAttribute[0].firstUser.userId
+  const firstUsername = result[0].extraAttribute[0].firstUser.chatName
+  const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
+  const firstUserBlocked = result[0].extraAttribute[0].firstUser.blockStatus
+  const firstArchievedStatus = result[0].extraAttribute[0].firstUser.archieved
+  // // const firstlabel = result[0].extraAttribute[0].firstUser.label
 
-            const secondUserId = result[0].extraAttribute[0].secondUser.userId
-            const secondUsername = result[0].extraAttribute[0].secondUser.chatName
-            const secondUserPinned = result[0].extraAttribute[0].secondUser.pinnedStatus
-            const secondUserBlocked = result[0].extraAttribute[0].secondUser.blockStatus
-            const secondArchievedStatus = result[0].extraAttribute[0].secondUser.archieved
-            // // const secondlabel = result[0].extraAttribute[0].secondUser.label
-
-
-            if (firstUserId == EditedBy) {
-
-                console.log('trus')
-                const updateData = {
-                    extraAttribute: [
-                        {
-                            firstUser: {
-                                userId: firstUserId,
-                                chatName: firstUsername,
-                                pinnedStatus: firstUserPinned,
-                                blockStatus: firstUserBlocked,
-                                archieved: firstArchievedStatus,
-                                // // label:firstlabel
+  const secondUserId = result[0].extraAttribute[0].secondUser.userId
+  const secondUsername = result[0].extraAttribute[0].secondUser.chatName
+  const secondUserPinned = result[0].extraAttribute[0].secondUser.pinnedStatus
+  const secondUserBlocked = result[0].extraAttribute[0].secondUser.blockStatus
+  const secondArchievedStatus = result[0].extraAttribute[0].secondUser.archieved
+  // // const secondlabel = result[0].extraAttribute[0].secondUser.label
 
 
-                            },
-                            secondUser: {
-                                userId: secondUserId,
-                                chatName: nameEdit,
-                                pinnedStatus: secondUserPinned,
-                                blockStatus: secondUserBlocked,
-                                archieved: secondArchievedStatus,
-                                // // label:secondlabel
+  if (firstUserId == EditedBy) {
+
+      console.log('trus')
+      const updateData = {
+          extraAttribute: [
+              {
+                  firstUser: {
+                      userId: firstUserId,
+                      chatName: firstUsername,
+                      pinnedStatus: firstUserPinned,
+                      blockStatus: firstUserBlocked,
+                      archieved: firstArchievedStatus,
+                      // // label:firstlabel
 
 
-
-                            }
-                        }
-                    ]
-                }
-                const options = {
-                    new: true
-                }
-                chat_listModel.findByIdAndUpdate(chatListId, updateData, options, (error, result) => {
-                    if (error) {
-                        res.json(error.message)
-                    } else {
-                        res.send({ data: result, message: "Updated Successfully" })
-                    }
-                })
-            } else {
-                console.log('sfsdsdd')
-                const updateData = {
-                    extraAttribute: [
-                        {
-                            firstUser: {
-                                userId: firstUserId,
-                                chatName: nameEdit,
-                                pinnedStatus: firstUserPinned,
-                                blockStatus: firstUserBlocked,
-                                archieved: firstArchievedStatus,
-                                // // label:firstlabel
+                  },
+                  secondUser: {
+                      userId: secondUserId,
+                      chatName: nameEdit,
+                      pinnedStatus: secondUserPinned,
+                      blockStatus: secondUserBlocked,
+                      archieved: secondArchievedStatus,
+                      // // label:secondlabel
 
 
 
-                            },
-                            secondUser: {
-                                userId: secondUserId,
-                                chatName: secondUsername,
-                                pinnedStatus: secondUserPinned,
-                                blockStatus: secondUserBlocked,
-                                archieved: secondArchievedStatus,
-                                // // label:secondlabel
+                  }
+              }
+          ]
+      }
+      const options = {
+          new: true
+      }
+      chat_listModel.findByIdAndUpdate(chatListId, updateData, options, (error, result) => {
+          if (error) {
+              res.json(error.message)
+          } else {
+              res.send({ data: result, message: "Updated Successfully" })
+          }
+      })
+  } else {
+      console.log('sfsdsdd')
+      const updateData = {
+          extraAttribute: [
+              {
+                  firstUser: {
+                      userId: firstUserId,
+                      chatName: nameEdit,
+                      pinnedStatus: firstUserPinned,
+                      blockStatus: firstUserBlocked,
+                      archieved: firstArchievedStatus,
+                      // // label:firstlabel
 
-                            }
-                        }
-                    ]
-                }
-                const options = {
-                    new: true
-                }
-                chat_listModel.findByIdAndUpdate(chatListId, updateData, options, (error, result) => {
-                    if (error) {
-                        res.json(error.message)
-                    } else {
-                        res.send({ data: result, message: "Updated Successfully" })
-                    }
-                })
+
+
+                  },
+                  secondUser: {
+                      userId: secondUserId,
+                      chatName: secondUsername,
+                      pinnedStatus: secondUserPinned,
+                      blockStatus: secondUserBlocked,
+                      archieved: secondArchievedStatus,
+                      // // label:secondlabel
+
+                  }
+              }
+          ]
+      }
+      const options = {
+          new: true
+      }
+      chat_listModel.findByIdAndUpdate(chatListId, updateData, options, (error, result) => {
+          if (error) {
+              res.json(error.message)
+          } else {
+              res.send({ data: result, message: "Updated Successfully" })
+          }
+      })
+  }
             }
+          
         }
     })
 }
@@ -351,11 +359,15 @@ exports.updatechat_listPinned = async (req, res) => {
     const chatListId = req.body._id;
 
     // console.log(nameEdit)
-    chat_listModel.find({ _id: chatListId }, (error, result) => {
+    chat_listModel.find({ _id: chatListId ,
+        $all: [EditedBy, EditedBy]}, (error, result) => {
         if (error) {
             res.send(error)
         } else {
-            // res.send(result[0].extraAttribute)
+            if(result.length===0){
+                res.json({message:'No data found to update'})
+                 }else{
+                      // res.send(result[0].extraAttribute)
             const firstUserId = result[0].extraAttribute[0].firstUser.userId
             const firstUsername = result[0].extraAttribute[0].firstUser.chatName
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
@@ -456,6 +468,8 @@ exports.updatechat_listPinned = async (req, res) => {
                     }
                 })
             }
+                 }
+          
         }
     })
 
@@ -467,11 +481,15 @@ exports.updatechat_listUnPinned = async (req, res) => {
     const EditedBy = req.body.edited_by;
     const chatListId = req.body._id;
     // console.log(nameEdit)
-    chat_listModel.find({ _id: chatListId }, (error, result) => {
+    chat_listModel.find({ _id: chatListId,
+        $all: [EditedBy, EditedBy] }, (error, result) => {
         if (error) {
             res.send(error)
         } else {
-            // res.send(result[0].extraAttribute)
+            if(result.length===0){
+                res.json({message:'No data found to update'})
+                 }else{
+                      // res.send(result[0].extraAttribute)
             const firstUserId = result[0].extraAttribute[0].firstUser.userId
             const firstUsername = result[0].extraAttribute[0].firstUser.chatName
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
@@ -569,6 +587,8 @@ exports.updatechat_listUnPinned = async (req, res) => {
                     }
                 })
             }
+                 }
+          
         }
     })
 
@@ -579,11 +599,15 @@ exports.updatechat_listBlocked = async (req, res) => {
     const chatListId = req.body._id;
 
     // console.log(nameEdit)
-    chat_listModel.find({ _id: chatListId }, (error, result) => {
+    chat_listModel.find({ _id: chatListId,
+        $all: [EditedBy, EditedBy] }, (error, result) => {
         if (error) {
             res.send(error)
         } else {
-            // res.send(result[0].extraAttribute)
+            if(result.length===0){
+                res.json({message:'No data found to update'})
+                 }else{
+                     // res.send(result[0].extraAttribute)
             const firstUserId = result[0].extraAttribute[0].firstUser.userId
             const firstUsername = result[0].extraAttribute[0].firstUser.chatName
             const firstUserPinned = result[0].extraAttribute[0].firstUser.pinnedStatus
@@ -684,6 +708,8 @@ exports.updatechat_listBlocked = async (req, res) => {
                     }
                 })
             }
+                 }
+           
         }
     })
 
@@ -694,10 +720,14 @@ exports.updatechat_listUnBlock = async (req, res) => {
     const EditedBy = req.body.unblocked_by;
     const chatListId = req.body._id;
     // console.log(nameEdit)
-    chat_listModel.find({ _id: chatListId }, (error, result) => {
+    chat_listModel.find({ _id: chatListId,
+        $all: [EditedBy, EditedBy] }, (error, result) => {
         if (error) {
             res.send(error)
         } else {
+            if(result.length===0){
+                res.json({message:'No data found to update'})
+                 }else{
             // res.send(result[0].extraAttribute)
             const firstUserId = result[0].extraAttribute[0].firstUser.userId
             const firstUsername = result[0].extraAttribute[0].firstUser.chatName
@@ -796,6 +826,7 @@ exports.updatechat_listUnBlock = async (req, res) => {
                     }
                 })
             }
+        }
         }
     })
 
@@ -806,10 +837,14 @@ exports.updatechat_listArchieved = async (req, res) => {
     const chatListId = req.body._id;
 
     // console.log(nameEdit)
-    chat_listModel.find({ _id: chatListId }, (error, result) => {
+    chat_listModel.find({ _id: chatListId ,
+        $all: [EditedBy, EditedBy]}, (error, result) => {
         if (error) {
             res.send(error)
         } else {
+            if(result.length===0){
+                res.json({message:'No data found to update'})
+                 }else{
             // res.send(result[0].extraAttribute)
             const firstUserId = result[0].extraAttribute[0].firstUser.userId
             const firstUsername = result[0].extraAttribute[0].firstUser.chatName
@@ -912,6 +947,7 @@ exports.updatechat_listArchieved = async (req, res) => {
                 })
             }
         }
+    }
     })
 
 }
@@ -920,10 +956,14 @@ exports.updatechat_listUnArchieved = async (req, res) => {
     const EditedBy = req.body.unarchieved_by;
     const chatListId = req.body._id;
     // console.log(nameEdit)
-    chat_listModel.find({ _id: chatListId }, (error, result) => {
+    chat_listModel.find({ _id: chatListId,
+        $all: [EditedBy, EditedBy] }, (error, result) => {
         if (error) {
             res.send(error)
         } else {
+            if(result.length===0){
+                res.json({message:'No data found to update'})
+                 }else{
             // res.send(result[0].extraAttribute)
             const firstUserId = result[0].extraAttribute[0].firstUser.userId
             const firstUsername = result[0].extraAttribute[0].firstUser.chatName
@@ -1023,6 +1063,7 @@ exports.updatechat_listUnArchieved = async (req, res) => {
                     }
                 })
             }
+        }
         }
     })
 
