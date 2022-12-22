@@ -107,9 +107,13 @@ module.exports.addMessage = async (req, res, next) => {
       ContactName,
       ContactImage,
        created_at, updated_at, repliedStatus,
-      repliedMsgId, readTime, deliveredTime, isForwarded,
+      repliedMsgId, isForwarded,
       deleted_at, is_deleted ,is_one_time,
       message_type_name,docType} = req.body;
+      const readTime=new Date()
+      const deliveredTime=new Date()
+
+      console.log(readTime)
       // console.log(files)
       if(message_type_name==='Text'){
       const data = await Messages.create({
